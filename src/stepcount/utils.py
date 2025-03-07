@@ -46,6 +46,7 @@ def read(
     """
 
     p = pathlib.Path(filepath)
+    filepath = str(p)
     fsize = round(p.stat().st_size / (1024 * 1024), 1)
     ftype = p.suffix.lower()
     if ftype in (".gz", ".xz", ".lzma", ".bz2", ".zip"):  # if file is compressed, check the next extension

@@ -16,16 +16,28 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from numba import njit
 
-from stepcount import utils
-from stepcount import __version__
-from stepcount import __model_version__
-from stepcount import __model_md5__
+import utils
+# from . import __version__
+# from . import __model_version__
+# from . import __model_md5__
+
+__model_version__ = {
+    "rf": "20230713",
+    "ssl": "ssl-20230208"
+}
+__model_md5__ = {
+    "rf": "9a6ef63ca4d651c937c18b25d5af4e72",
+    "ssl": "eea6179f079b554d5e2c8c98ccea8423"
+}
+
+import _version
+__version__ = _version.get_versions()['version']
 
 warnings.filterwarnings('ignore', message='Mean of empty slice')  # shut .median() warning when all-NaN
 
 
 
-def main():
+def main(file):
 
     parser = argparse.ArgumentParser(
         description="A tool to estimate step counts from accelerometer data",
@@ -100,7 +112,7 @@ def main():
 
     # Load file
     data, info_read = utils.read(
-        args.filepath, 
+        file,
         usecols=args.txyz, 
         start_time=args.start,
         end_time=args.end,
@@ -1208,4 +1220,10 @@ def plot(Y, title=None):
 
 
 if __name__ == '__main__':
-    main()
+    # from pathlib import Path
+    file = "W:/dev/stepcount/MacM3_643_24M_AXV3_LThigh.CWA"
+    # file = Path(file)
+    # file.is_file()
+    #
+
+    main(file)
