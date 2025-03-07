@@ -37,7 +37,7 @@ warnings.filterwarnings('ignore', message='Mean of empty slice')  # shut .median
 
 
 
-def main(filepath, outdir):
+def main():
 
     parser = argparse.ArgumentParser(
         description="A tool to estimate step counts from accelerometer data",
@@ -96,8 +96,8 @@ def main(filepath, outdir):
     parser.add_argument('--quiet', '-q', action='store_true', help='Suppress output')
     args = parser.parse_args()
 
-    args.filepath = str(pathlib.Path(filepath))
-    args.outdir = str(pathlib.Path(outdir))
+    # args.filepath = str(pathlib.Path(filepath))
+    # args.outdir = str(pathlib.Path(outdir))
 
     before = time.time()
 
@@ -1230,4 +1230,4 @@ if __name__ == '__main__':
     # file.is_file()
     #
 
-    main(filepath, outdir)
+    main()
