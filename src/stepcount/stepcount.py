@@ -37,7 +37,7 @@ warnings.filterwarnings('ignore', message='Mean of empty slice')  # shut .median
 
 
 
-def main(file):
+def main(filepath, outdir):
 
     parser = argparse.ArgumentParser(
         description="A tool to estimate step counts from accelerometer data",
@@ -96,6 +96,9 @@ def main(file):
     parser.add_argument('--quiet', '-q', action='store_true', help='Suppress output')
     args = parser.parse_args()
 
+    args.filepath = str(pathlib.Path(filepath))
+    args.outdir = str(pathlib.Path(outdir))
+
     before = time.time()
 
     verbose = not args.quiet
@@ -112,7 +115,7 @@ def main(file):
 
     # Load file
     data, info_read = utils.read(
-        file,
+        args.filepath,
         usecols=args.txyz, 
         start_time=args.start,
         end_time=args.end,
@@ -1221,9 +1224,10 @@ def plot(Y, title=None):
 
 if __name__ == '__main__':
     # from pathlib import Path
-    file = "W:/dev/stepcount/MacM3_643_24M_AXV3_LThigh.CWA"
+    filepath = "W:/dev/stepcount/MacM3_643_24M_AXV3_LThigh.CWA"
+    outdir = "W:/dev/stepcount"
     # file = Path(file)
     # file.is_file()
     #
 
-    main(file)
+    main(filepath, outdir)
